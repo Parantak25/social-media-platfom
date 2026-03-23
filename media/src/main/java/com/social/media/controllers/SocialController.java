@@ -5,10 +5,7 @@ import com.social.media.service.SocialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,10 @@ public class SocialController {
     @PostMapping("/social/saveUser")
     public ResponseEntity<SocialUser> saveSocialUser(@RequestBody SocialUser socialUser) {
         return new ResponseEntity<>(socialService.createUser(socialUser),HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/social/deleteUser/{id}")
+    public ResponseEntity<String> deleteSocialUser(@RequestParam long id) {
+        return new ResponseEntity<>(socialService.deleteUser(id),HttpStatus.OK);
     }
 }

@@ -16,8 +16,7 @@ public class SocialUser {
     @GeneratedValue
     private Long id;
 
-    @OneToOne
-    @JoinColumn
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private SocialProfile profile;
 
     @OneToMany(mappedBy = "user")
@@ -33,5 +32,11 @@ public class SocialUser {
     @Override
     public int hashCode(){
         return Objects.hash(id);
+    }
+
+    //when we create a user with cascade the profile too gets created but the user is not updated with the profile, hence this custom setter
+    public void setProfile(SocialProfile profile){
+        profile.setUser(this);
+        this.profile = profile;
     }
 }

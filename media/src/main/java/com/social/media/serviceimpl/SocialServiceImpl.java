@@ -23,4 +23,10 @@ public class SocialServiceImpl implements SocialService {
     public SocialUser createUser(SocialUser socialUser) {
         return socialUserRepository.save(socialUser);
     }
+
+    @Override
+    public String deleteUser(long id) {
+        socialUserRepository.deleteById(id);
+        return "User deleted successfully";
+    }
 }
